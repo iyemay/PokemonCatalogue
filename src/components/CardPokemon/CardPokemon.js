@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import Card from '@material-ui/core/Card';
 import { makeStyles } from '@material-ui/core/styles';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
+import { connect } from "react-redux";
 
 const useStyles = makeStyles({
     root: {
@@ -17,22 +18,25 @@ const useStyles = makeStyles({
     },
 });
 
-export default function CardPokemon() {
+class CardPokemon extends Component  {
 
-    const classes = useStyles();
-
+    render() {
+        // const classes = useStyles();
+        const pokemon = this.props.pokemon;
         return (
             <div className="d-flex mt-5 mr-1">
-                <Card className={classes.root}>
+                <Card
+                    // className={classes.root}
+                >
                     <CardActionArea>
                         <CardMedia
-                            className={classes.media}
+                            // className={classes.media}
                             image="/images/pokemon.jpg"
                             title="Contemplative Reptile"
                         />
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2">
-                                Pokémon
+                                {pokemon.name}
                             </Typography>
                         </CardContent>
                     </CardActionArea>
@@ -44,4 +48,18 @@ export default function CardPokemon() {
                 </Card>
             </div>
         );
+    }
 }
+
+function findPokemonById(pokemonsList, pokemonName) {
+    return pokemonsList.find(pokemon => pokemon.name === pokemonName);
+}
+
+function mapStateToProps(state, ownProps) {
+    const pokemon = findPokemonById(state.pokemonsList, ownProps.pokemon);
+    return {
+        pokemon: pokemon
+    };
+}
+
+export default connect(mapStateToProps)(CardPokemon);
