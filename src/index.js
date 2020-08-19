@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import HeaderCatalogue from "./components/HeaderCatalogue/HeaderCatalogue.scss";
 import DropdownPokemonRender from "./components/DropdownPokemonRender/DropdownPokemonRender.scss";
 import CardPokemon from "./components/CardPokemon/CardPokemon.scss";
+import ListCardPokemon from "./components/ListCardPokemon/ListCardPokemon.scss"
 
 
 ReactDOM.render(
