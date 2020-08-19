@@ -18,37 +18,30 @@ const useStyles = makeStyles({
     },
 });
 
-class CardPokemon extends Component  {
+const CardPokemon = (props) => {
+    const classes = useStyles();
+    const pokemon = props.pokemon;
 
-    render() {
-        // const classes = useStyles();
-        const pokemon = this.props.pokemon;
-        return (
-            <div className="d-flex mt-5 mr-1">
-                <Card
-                    // className={classes.root}
-                >
-                    <CardActionArea>
-                        <CardMedia
-                            // className={classes.media}
-                            image="/images/pokemon.jpg"
-                            title="Contemplative Reptile"
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                {pokemon.name}
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                    <CardActions>
-                        <Button size="small" color="primary">
-                            Ver Ataques!
-                        </Button>
-                    </CardActions>
-                </Card>
-            </div>
-        );
-    }
+    return (
+        <div className="d-flex mt-5 mr-1">
+            <Card className={classes.root}>
+                <CardActionArea>
+                    <CardMedia className={classes.media}  image="/images/pokemon.jpg"
+                               title="Contemplative Reptile"/>
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            {pokemon.name}
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+                <CardActions>
+                    <Button size="small" color="primary">
+                        Ver Ataques!
+                    </Button>
+                </CardActions>
+            </Card>
+        </div>
+    );
 }
 
 function findPokemonById(pokemonsList, pokemonName) {
