@@ -13,7 +13,7 @@ const useStyles = makeStyles({
         minWidth: 250,
     },
     media: {
-        height: 100,
+        height: 150,
     },
 });
 
@@ -22,12 +22,12 @@ export default function CardPokemon() {
     const classes = useStyles();
 
         return (
-            <div className="d-flex justify-content-center mt-5">
+            <div className="d-flex mt-5 mr-1">
                 <Card className={classes.root}>
                     <CardActionArea>
                         <CardMedia
                             className={classes.media}
-                            image="/public/images/pokemon.jpg"
+                            image="/images/pokemon.jpg"
                             title="Contemplative Reptile"
                         />
                         <CardContent>
@@ -44,5 +44,4 @@ export default function CardPokemon() {
                 </Card>
             </div>
         );
-
 }
