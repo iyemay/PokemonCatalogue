@@ -5,10 +5,11 @@ import { connect } from 'react-redux';
 class ListCardPokemon extends Component {
 
     render() {
-        if(this.props.pokemonsList.length) {
+        const pokemonsToShow = this.props.pokemonsList.slice(0,this.props.pageSize);
+        if(pokemonsToShow.length) {
             return (
                 <div className="d-flex justify-content-around card-group mt-3">
-                    {this.props.pokemonsList.map(pokemon => {
+                    {pokemonsToShow.map(pokemon => {
                         return (
                             <CardPokemon key={pokemon.name} pokemon={pokemon.name}/>
                         );
@@ -27,6 +28,8 @@ class ListCardPokemon extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({ pokemonsList: state.pokemonsList });
+const mapStateToProps = (state) => ({
+    pokemonsList: state.pokemonsList,
+    pageSize: state.pageSize});
 
 export default connect(mapStateToProps)(ListCardPokemon);
