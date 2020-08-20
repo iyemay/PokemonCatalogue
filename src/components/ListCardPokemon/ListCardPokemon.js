@@ -3,6 +3,7 @@ import CardPokemon from "../CardPokemon/CardPokemon";
 import { connect } from 'react-redux';
 
 class ListCardPokemon extends Component {
+
     render() {
         if(this.props.pokemonsList.length) {
             return (
@@ -17,7 +18,7 @@ class ListCardPokemon extends Component {
         } else {
             return (
                 <div className="d-flex justify-content-center mt-5">
-                    <h5>Pokemons List Empty</h5>
+                    <h5>Loading Pokémon Catalogue...</h5>
                 </div>
             );
 
