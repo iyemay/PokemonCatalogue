@@ -4,7 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import {connect} from "react-redux";
+import {getPokemonAttacks} from "../../actions/actions";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles(theme => ({
     modal: {
@@ -23,12 +24,13 @@ const useStyles = makeStyles(theme => ({
 const ModalAttacks = (props) => {
 
     const pokemon = props.pokemon;
+    const attacks = props.attacks;
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
-
     const handleOpen = () => {
         setOpen(true);
+        props.getPokemonAttacks(pokemon);
     };
 
     const handleClose = () => {
@@ -64,7 +66,11 @@ const ModalAttacks = (props) => {
                         <div className="content-modal">
                             <p className="mb-0">Attacks</p>
                             <hr className="m-0 mb-2"/>
-                            <span className="badge badge-info">Danger</span>
+
+                            {attacks.map((attack, i) => (
+                                    <span className="badge badge-info" key={i}>{attack.name}</span>
+                                ))
+                            }
                         </div>
                     </div>
                 </Fade>
@@ -73,15 +79,7 @@ const ModalAttacks = (props) => {
     );
 }
 
-function findPokemonById(pokemonsList, pokemonName) {
-    return pokemonsList.find(pokemon => pokemon.name === pokemonName);
-}
 
-function mapStateToProps(state, ownProps) {
-    const pokemon = findPokemonById(state.pokemonsList, ownProps.pokemon);
-    return {
-        pokemon: pokemon
-    };
-}
-
-export default connect(mapStateToProps)(ModalAttacks);
+const mapStateToProps = (state) => ({attacks: state.currentPokemonAttacks});
+const mapDispatchToProps =  { getPokemonAttacks };
+export default (connect)(mapStateToProps, mapDispatchToProps)(ModalAttacks);

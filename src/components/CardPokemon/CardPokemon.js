@@ -37,7 +37,7 @@ const CardPokemon = (props) => {
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                   <ModalAttacks pokemon={pokemon.name}/>
+                   <ModalAttacks pokemon={pokemon}/>
                 </CardActions>
             </Card>
         </div>
