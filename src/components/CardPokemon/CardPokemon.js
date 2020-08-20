@@ -26,7 +26,7 @@ const CardPokemon = (props) => {
         <div className="d-flex mt-5 mr-1">
             <Card className={classes.root}>
                 <CardActionArea>
-                    <CardMedia className={classes.media}  image="/images/pokemon.jpg"
+                    <CardMedia className={classes.media}  image={pokemon.image}
                                title="Contemplative Reptile"/>
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
@@ -36,7 +36,7 @@ const CardPokemon = (props) => {
                 </CardActionArea>
                 <CardActions>
                     <Button size="small" color="primary">
-                        Ver Ataques!
+                        Skills!
                     </Button>
                 </CardActions>
             </Card>
