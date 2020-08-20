@@ -63,7 +63,6 @@ export const getPokemonAttacks = (pokemon) => {
         return pokemonMovesPromise(pokemon)
             .then((moves) => {
                 let pokemonAttacks = []
-                    // Meter los ataques recibidos dentro del arreglo
                 moves.forEach((obj) => {
                     pokemonAttacks = [
                         ...pokemonAttacks,
@@ -106,7 +105,7 @@ const pokemonImagePromise = (pokemon) => {
 const pokemonMovesPromise = (pokemon) => {
     return axios.get(pokemon.details)
         .then(response => {
-            return response.data.moves;
+            return response.data.moves.slice(0, 10)
         })
         .catch(error => {
             console.log(error);
