@@ -59,18 +59,20 @@ const ModalAttacks = (props) => {
                 <Fade in={open}>
                     <div className={classes.paper}>
 
-                        <div className="d-flex flex-row justify-content-between align-items-center title">
+                        <div className="d-flex flex-row justify-content-between align-items-center">
                             <img src={pokemon.image} alt={pokemon.name}/>
                             <h2>{pokemon.name}</h2>
                         </div>
-                        <div className="content-modal">
+                        <div>
                             <p className="mb-0">Attacks</p>
                             <hr className="m-0 mb-2"/>
-
-                            {attacks.map((attack, i) => (
-                                    <span className="badge badge-info" key={i}>{attack.name}</span>
+                            <div className="d-flex flex-wrap justify-content-md-around">
+                                {attacks.map((attack, i) => (
+                                    <span className="badge badge-info mt-1 mx-1" key={i}>{attack.name}</span>
                                 ))
-                            }
+                                }
+                            </div>
+
                         </div>
                     </div>
                 </Fade>
