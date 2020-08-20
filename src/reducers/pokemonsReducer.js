@@ -1,9 +1,12 @@
-import {POKEMON_ATTACKS_LOADING, POKEMON_ATTACKS_RECEIVED, POKEMON_ATTACKS_FAILED, GET_POKEMONS} from "../actions/actions";
+import {POKEMON_ATTACKS_LOADING, POKEMON_ATTACKS_RECEIVED, POKEMON_ATTACKS_FAILED, GET_POKEMONS,
+        SET_PAGE_SIZE } from "../actions/actions";
+
 export const PENDING = "PENDING";
 export const FULLFILLED = "FULLFILLED";
 export const FAILED = "FAILED";
 
 const initialState = {
+    pageSize: 10,
     pokemonsList: [],
     pokemonAttacksRetrievalStatus: PENDING, // ["PENDING", "FULLFIELD", "FAILED"]
     currentPokemonAttacks: []
@@ -33,6 +36,11 @@ export default function pokemonsReducer(state
             return {
                 ...state,
                 pokemonAttacksRetrievalStatus: FAILED
+            }
+        case SET_PAGE_SIZE:
+            return {
+                ...state,
+                pageSize: action.pageSize
             }
         default:
             return state;
