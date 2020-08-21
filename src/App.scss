@@ -7,3 +7,15 @@ body {
   background-color: #f4f4f8 !important;
   font-family: Righteous, sans-serif !important;
 }
+
+@media (max-width: 740px) {
+  .width-container {
+      width: 100%;
+      padding-left: 2rem;
+      padding-right: 2rem;
+  }
+}
+
+
+
+

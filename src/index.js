@@ -9,8 +9,6 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import HeaderCatalogue from "./components/HeaderCatalogue/HeaderCatalogue.scss";
-import DropdownPokemonRender from "./components/DropdownPokemonRender/DropdownPokemonRender.scss";
-import CardPokemon from "./components/CardPokemon/CardPokemon.scss";
 import ListCardPokemon from "./components/ListCardPokemon/ListCardPokemon.scss";
 import { getPokemons } from "./actions/actions";
 import pokemonsReducer from "./reducers/pokemonsReducer";
