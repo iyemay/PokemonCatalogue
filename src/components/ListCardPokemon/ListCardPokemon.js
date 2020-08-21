@@ -11,16 +11,14 @@ class ListCardPokemon extends Component {
 
         if (statePokemons === PENDING) {
             return (
-                <div className="d-flex flex-row mt-5 justify-content-center align-items-center">
-                    <div className="spinner-grow spinner-grow-sm text-info mr-2"
-                         role="status">
+                <div className="d-flex flex-row mt-5 justify-content-around">
+                    <div className="spinner-grow spinner-grow-sm text-info mr-2" role="status">
                         <span className="sr-only">Loading...</span>
                     </div>
 
-                    <div className="justify-content-center">
+                    <div>
                         <p className="mb-0 mr-2 loading-message">Retrieving pokemons</p>
                     </div>
-
 
                     <div className="spinner-grow spinner-grow-sm text-info" role="status">
                         <span className="sr-only">Loading...</span>
@@ -30,7 +28,8 @@ class ListCardPokemon extends Component {
             );
         } else if (statePokemons === FULLFILLED) {
             return (
-                <div className="d-flex justify-content-around card-group mt-3">
+                <div className="d-flex flex-column flex-sm-row justify-content-sm-center
+                                justify-content-md-around card-group mt-3">
                     {pokemonsToShow.map(pokemon => {
                         return (
                             <CardPokemon key={pokemon.name} pokemon={pokemon.name}/>

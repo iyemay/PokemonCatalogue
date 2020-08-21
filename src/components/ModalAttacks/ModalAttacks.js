@@ -40,7 +40,7 @@ const ModalAttacks = (props) => {
     };
 
     return (
-        <div>
+        <div className="d-flex justify-content-sm-center">
 
             <Button variant="contained" color="secondary" onClick={handleOpen}>
                 See More
