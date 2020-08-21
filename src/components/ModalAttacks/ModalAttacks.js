@@ -6,6 +6,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import {getPokemonAttacks} from "../../actions/actions";
 import { connect } from "react-redux";
+import { PENDING, FULLFILLED, FAILED } from "../../reducers/pokemonsReducer";
 
 const useStyles = makeStyles(theme => ({
     modal: {
@@ -25,6 +26,7 @@ const ModalAttacks = (props) => {
 
     const pokemon = props.pokemon;
     const attacks = props.attacks;
+    const stateAttacks = props.pokemonAttacksRetrievalStatus;
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
@@ -66,12 +68,40 @@ const ModalAttacks = (props) => {
                         <div>
                             <p className="mb-0">Attacks</p>
                             <hr className="m-0 mb-2"/>
+
+                            { stateAttacks === PENDING &&
+                            <div className="d-flex flex-row justify-content-center align-items-center">
+                                <div className="spinner-grow spinner-grow-sm text-info mr-2"
+                                     role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+
+                                <div className="justify-content-center">
+                                    <p className="mb-0 mr-2">Retrieving attacks</p>
+                                </div>
+
+
+                                <div className="spinner-grow spinner-grow-sm text-info" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+
+                            </div>
+                            }
+
+                            { stateAttacks === FULLFILLED &&
                             <div className="d-flex flex-wrap justify-content-md-around">
                                 {attacks.map((attack, i) => (
                                     <span className="badge badge-info mt-1 mx-1" key={i}>{attack.name}</span>
                                 ))
                                 }
                             </div>
+                            }
+
+                            { stateAttacks === FAILED &&
+                            <div className="d-flex flex-row mt-1 align-items-center">
+                                <i className="fa fa-exclamation-circle" />
+                                <p className="ml-2 mb-0">Error retrieving attacks</p>
+                            </div>}
 
                         </div>
                     </div>
@@ -82,6 +112,11 @@ const ModalAttacks = (props) => {
 }
 
 
-const mapStateToProps = (state) => ({attacks: state.currentPokemonAttacks});
+const mapStateToProps = (state) => ({
+    attacks: state.currentPokemonAttacks,
+    pokemonAttacksRetrievalStatus: state.pokemonAttacksRetrievalStatus
+});
+
+
 const mapDispatchToProps =  { getPokemonAttacks };
 export default (connect)(mapStateToProps, mapDispatchToProps)(ModalAttacks);

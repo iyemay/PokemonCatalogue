@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.css';
+import '../node_modules/font-awesome/css/font-awesome.min.css';
 import HeaderCatalogue from "./components/HeaderCatalogue/HeaderCatalogue.scss";
 import DropdownPokemonRender from "./components/DropdownPokemonRender/DropdownPokemonRender.scss";
 import CardPokemon from "./components/CardPokemon/CardPokemon.scss";

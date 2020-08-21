@@ -68,22 +68,24 @@ export const getPokemonAttacks = (pokemon) => {
     return (dispatch) => {
         dispatch(pokemonAttacksLoading());
 
-        return pokemonMovesPromise(pokemon)
-            .then((moves) => {
-                let pokemonAttacks = []
-                moves.forEach((obj) => {
-                    pokemonAttacks = [
-                        ...pokemonAttacks,
-                        obj.move
-                    ]
-                })
+        setTimeout(function ()  {
+            return pokemonMovesPromise(pokemon)
+                .then((moves) => {
+                    let pokemonAttacks = []
+                    moves.forEach((obj) => {
+                        pokemonAttacks = [
+                            ...pokemonAttacks,
+                            obj.move
+                        ]
+                    })
 
-                dispatch(pokemonAttacksReceived(pokemonAttacks));})
-            .catch(error => {
-                console.log(error);
-                dispatch(pokemonAttacksFailed());
-                throw(error);
-            });
+                    dispatch(pokemonAttacksReceived(pokemonAttacks));})
+                .catch(error => {
+                    console.log(error);
+                    dispatch(pokemonAttacksFailed());
+                    throw(error);
+                });
+        }, 3000, pokemon);
     }
 }
 
