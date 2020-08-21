@@ -5,19 +5,15 @@ export const SET_PAGE_SIZE = 'SET_PAGE_SIZE';
 export const POKEMON_ATTACKS_LOADING = 'POKEMON_ATTACKS_LOADING';
 export const POKEMON_ATTACKS_RECEIVED = 'POKEMON_ATTACKS_RECEIVED';
 export const POKEMON_ATTACKS_FAILED = 'POKEMON_ATTACKS_FAILED';
+export const POKEMONS_LOADING = 'POKEMONS_LOADING';
+export const POKEMONS_RECEIVED = 'POKEMONS_RECEIVED';
+export const POKEMONS_FAILED = 'POKEMONS_FAILED';
 const apiUrl = 'https://pokeapi.co/api/v2';
 
 export function setPageSizeAction(pageSize) {
     return {
         type: SET_PAGE_SIZE,
         pageSize: pageSize
-    }
-}
-
-export function getPokemonsAction(pokemons) {
-    return {
-        type: GET_POKEMONS,
-        pokemons: pokemons
     }
 }
 
@@ -40,27 +36,51 @@ export function pokemonAttacksFailed() {
     }
 }
 
+export function pokemonsReceived(pokemons) {
+    return {
+        type: POKEMONS_RECEIVED,
+        pokemons: pokemons
+    }
+}
+
+export function pokemonsFailed() {
+    return {
+        type: POKEMONS_FAILED
+    }
+}
+
+export function pokemonsLoading() {
+    return {
+        type: POKEMONS_LOADING
+    }
+}
+
 export const getPokemons = () => {
     return (dispatch) => {
-        return axios.get(`${apiUrl}/pokemon?offset=0&limit=100`)
-            .then(response => {
-                let pokemonRequests = [];
+        dispatch(pokemonsLoading());
 
-                response.data.results.forEach((pokemon, i) => {
-                    pokemonRequests = [
-                        ...pokemonRequests,
-                        pokemonPromise(pokemon, i)
-                    ];
-                });
+        setTimeout(function () {
+            return axios.get(`${apiUrl}/pokemon?offset=0&limit=100`)
+                .then(response => {
+                    let pokemonRequests = [];
 
-                Promise.all(pokemonRequests).then((pokemons) => {
-                    dispatch(getPokemonsAction(pokemons));
+                    response.data.results.forEach((pokemon, i) => {
+                        pokemonRequests = [
+                            ...pokemonRequests,
+                            pokemonPromise(pokemon, i)
+                        ];
+                    });
+
+                    Promise.all(pokemonRequests).then((pokemons) => {
+                        dispatch(pokemonsReceived(pokemons));
+                    });
+                })
+                .catch(error => {
+                    console.log(error);
+                    dispatch(pokemonsFailed());
+                    throw(error);
                 });
-            })
-            .catch(error => {
-                console.log(error);
-                throw(error);
-            });
+        }, 1500);
     };
 };
 
