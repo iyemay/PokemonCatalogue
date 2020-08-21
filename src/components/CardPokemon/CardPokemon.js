@@ -9,6 +9,7 @@ import CardActions from '@material-ui/core/CardActions';
 import { connect } from "react-redux";
 import ModalAttacks from "../ModalAttacks/ModalAttacks";
 
+
 const useStyles = makeStyles({
     root: {
         minWidth: 250,
@@ -24,7 +25,7 @@ const CardPokemon = (props) => {
     const pokemon = props.pokemon;
 
     return (
-        <div className="d-flex flex-column flex-sm-row justify-content-sm-center mt-5 mr-1">
+        <div className="d-flex mt-5 mr-1">
             <Card className={classes.root}>
                 <CardActionArea>
                     <CardMedia className={classes.media}  image={pokemon.image}
